@@ -1,0 +1,60 @@
+*{
+    margin:0px;
+    padding:0px;
+}
+h2{
+    display:inline-block;
+}
+h1, h2{
+    margin:10px;
+}
+h3{
+    margin-left: 10px;
+}
+.index_div{
+    margin: 10px;
+    display: inline-block;
+    vertical-align: top;
+    border: .2pt black solid;
+}
+form{
+    margin: 10px;
+}
+.thoughts{
+    padding: 10px;
+}
+
+#users_table{
+    margin-left: 500px;
+    border: 2pt black solid;
+}
+.float{
+    float: left;
+    line-height: 1rem;
+}
+label{
+    margin-right: 10px;
+    display: inline-block;
+    width: 110px; 
+    text-align: right; 
+}
+.button_index{
+    float: right;
+    padding: 2px;
+    margin-bottom: 10px;
+}
+.logout{
+    padding: 10px;
+    float: right;
+    font-size: 18px;
+}
+table{
+    margin: 20px;
+} 
+th, td {
+    padding: 10px;
+    border: 1px solid black;
+}
+.like{
+    margin: 300px;
+}

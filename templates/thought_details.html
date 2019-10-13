@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Thought Board</title>
+    <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='./stylesheet.css')}}">      
+</head>
+<body>
+    <div class="thoughts">
+        <a class="logout" href="/thoughts">Dashboard</a>
+        <a class="logout" href="/logout">Logout</a></p>
+        <br><br>
+        <h2>{{thought["first_name"]}} says:</h2><br>
+        <textarea cols="43" rows="7" disabled>{{thought["content"]}}</textarea>
+    
+    {% if thought["thought_id"] in liked_thoughts %}
+    <p><a class="like" href="/unlike/{{thought['thought_id']}}">Unlike</a></p>
+    {% else %}
+    <p><a class="like" href="/like/{{thought['thought_id']}}">Like</a></p>
+    {% endif %}     
+    <br><br>
+    <h3>People who liked this thought: </h3>
+    <table>
+            <tbody>
+            <tr>
+                <th>First Name</th>
+                <th>Last Name</th>
+            </tr>
+            {% for user in users_liked %}
+            {% if user["user_id"] != thought["author"]%}
+            <tr>
+                <td>{{ user["first_name"]}}</td><td>{{user["last_name"]}}</td>
+            </tr>     
+            {% endif %}
+            {% endfor %}                    
+            {% for owner in users_liked %}
+            {% if owner["user_id"] == thought["author"] %}
+            <tr>
+                <td>{{ owner["first_name"]}}</td><td>{{owner["last_name"]}}</td>
+            </tr>
+            {% endif %}            
+            {% endfor %}
+            </tbody>
+        </table>    
+
+
+    </div>
+</body>
+</html>

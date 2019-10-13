@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>{{user_data["first_name"]}}'s Thoughts</title>
+    <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='./stylesheet.css')}}">      
+</head>
+<body>
+    <h2>Hi {{user_data["first_name"]}} {{user_data["last_name"]}}</h2><a class="logout" href="/logout">Logout</a>
+    
+
+    <form action="/create_thought" id="thoughts" method="POST">
+        <textarea form="thoughts" rows="10" cols="50" placeholder="Post a Great Thought Here!" name="thought_content"></textarea><br>
+        <button type="submit">Add Thought!</button>
+    </form>
+    {% with messages = get_flashed_messages(category_filter=["false"]) %}
+    {% if messages %}                            
+        {% for message in messages %}            
+            <p style="color:red">{{message}}</p>                
+        {% endfor %}
+    {% endif %}
+    {% endwith %}
+    {% with messages = get_flashed_messages(category_filter=["true"]) %}
+    {% if messages %}                            
+        {% for message in messages %}            
+            <p style="color:blue">{{message}}</p>                
+        {% endfor %}
+    {% endif %}
+    {% endwith %}
+    
+    <div class="thoughts">
+    {% for thought in thoughts_data %}
+    <p>{{ thought["first_name"]}} says: </p>
+    <textarea cols="43" rows="7" disabled>{{ thought["content"] }}</textarea>
+    {% for like in like_count %}
+        {% if like["thought_like"] == thought["thought_id"] %}
+            <p>Liked {{like["like_count"]}} times</p>
+        {% endif %}
+    {% endfor %}
+    <a href="/{{thought['thought_id']}}">Details</a>
+    <br>
+    {% if thought["first_name"] == user_data["first_name"] %} 
+    <br><p><a href="/delete_thought/{{thought['thought_id']}}"><button class="delete">Delete</button></a></p>
+    {% endif %}
+    <br><hr>    
+    {% endfor %}
+    
+    </div>
+</body>
+</html>
