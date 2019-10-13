@@ -158,7 +158,8 @@ def like_thought(thought_id):
         "thought_id": thought_id
     }
     mysql.query_db(query, data)
-    return redirect(f"/{thought_id}")
+    # return redirect(f"/{thought_id}")
+    return redirect("/{}".format(thought_id))
 
 @app.route("/unlike/<thought_id>")
 def unlike_thought(thought_id):
@@ -172,6 +173,7 @@ def unlike_thought(thought_id):
         "thought_id": thought_id
     }
     mysql.query_db(query, data)
-    return redirect(f"/{thought_id}")
+    # return redirect(f"/{thought_id}")
+    return redirect("/{}".format(thought_id))
 if __name__ == "__main__":
     app.run(debug=True)
